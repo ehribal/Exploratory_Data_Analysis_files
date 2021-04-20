@@ -1,0 +1,322 @@
+---
+title: "470 Proj 2"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+install.packages("tidyverse")
+```
+
+```{r}
+library(devtools)
+remotes::install_github("vqv/ggbiplot", force = TRUE)
+```
+
+```{r}
+library(ade4)
+library(ggbiplot)
+library(viridis)
+```
+
+```{r}
+votes_1997 <- read.csv("votes_1997.csv")
+votes_2014 <- read.csv("votes_2014.csv")
+members_1997 <- read.csv("members_1997.csv")
+members_2014 <- read.csv("members_2014.csv")
+```
+
+```{r}
+joined_97 <- join(members_1997, votes_1997, by="id")
+View(joined_97)
+```
+
+```{r}
+#columns_1989 <- colnames(votes_1997[2:ncol(votes_1997)])
+
+#votes_1989 <- votes_1989 %>% mutate_at(columns_1989,funs(recode(., 'Yea' = 1, 'Nay' = -1, 'Not Voting' = 0)))
+#votes_89_pca <- prcomp(votes_1989,scale=FALSE)
+```
+
+```{r}
+recode = function(x) {
+    if(is.na(x)) {
+        return(0)
+    } else if(x == "Yea") {
+        return(1)
+    } else if(x == "Nay") {
+        return(-1)
+    } else {
+        return(0)
+    }
+}
+```
+
+```{r}
+votes_97_num = apply(joined_97[7:ncol(joined_97)], 1:2, recode)
+```
+
+```{r}
+#votes_1989 <- votes_1989[,colSums(is.na(votes_1989)) == 0]
+```
+
+```{r}
+votes_97_pca <- prcomp(votes_97_num, scale=FALSE)
+```
+
+```{r}
+plot(votes_97_pca$sdev^2 / sum(votes_97_pca$sdev^2))
+```
+
+```{r}
+ggbiplot(votes_97_pca,scale=0, var.axes = FALSE, groups=members_1997$party) + scale_color_manual(values = c("D" = "darkblue", "R" = "firebrick")) + ggtitle("Fig 1: PCA Biplot for Senators by party, 1997") + theme(text = element_text(size=10), plot.title = element_text(hjust=0.5))
+```
+
+```{r}
+joined_14 <- join(members_2014, votes_2014, by="id")
+```
+
+```{r}
+#votes_1989 %>%
+  #mutate(s1.101.1989=recode(s1.101.1989,'Yea' = "Yes",'Not Voting' = "NV"))
+```
+
+
+```{r}
+votes_14_num = apply(joined_14[7:ncol(joined_14)], 1:2, recode)
+```
+
+```{r}
+votes_14_pca <- prcomp(votes_14_num, scale=FALSE)
+```
+
+```{r}
+plot(votes_14_pca$sdev^2 / sum(votes_14_pca$sdev^2))
+```
+
+```{r}
+ggbiplot(votes_14_pca,scale=0, var.axes = FALSE, groups=members_2014$party) + scale_color_manual(values = c("D" = "darkblue", "R" = "firebrick", "I" = "green")) + ggtitle("Fig 2: PCA Biplot for Senators by party, 2014") + theme(text = element_text(size=10), plot.title = element_text(hjust=0.5))
+```
+
+```{r}
+reps_97 <- which(joined_97$party == "R")
+View(joined_97)
+```
+
+```{r}
+
+pc1_var <- c()
+
+vote1 <- "votes_"
+members1 <- "members_"
+csv <- ".csv"
+
+counter = 1
+
+for (i in 1989:2014){
+  year <- i
+  
+  votes_string <- paste(vote1,year,csv,sep="")
+  members_string <- paste(members1,year,csv,sep="")
+  
+  votes_i <- read.csv(votes_string)
+  members_i <- read.csv(members_string)
+  
+  joined_i <- join(members_i, votes_i, by="id")
+  
+  votes_i_num = apply(joined_i[7:ncol(joined_i)], 1:2, recode)
+  
+  votes_i_pca <- prcomp(votes_i_num, scale=FALSE)
+  
+  pc1_var[counter] <- summary(votes_i_pca)$importance[2]
+  
+  counter = counter + 1
+
+}
+```
+
+```{r}
+voting_years <- 1989:2014
+```
+
+```{r}
+plot(voting_years,pc1_var,type="b",xlab="Year",ylab="Variance Explained By Party Affiliation",main="Fig 3: Polarization by Year")
+```
+
+```{r}
+votes_1989 <- read.csv("votes_1989.csv")
+members_1989 <- read.csv("members_1989.csv")
+joined_89 <- join(members_1989,votes_1989, by="id")
+```
+
+
+```{r}
+mc <- which(joined_89$last_name == "McConnell")
+
+dem <- which(joined_89$party =="D")
+
+mem_dem <- which(members_1989$party == "D")
+
+rep <- which(joined_89$party =="R")
+
+#mcmem_rep <- which((members_1989$last_name == "McConnell") | (members_1989$party == "R"))
+```
+
+```{r}
+votes_89_num = apply(joined_89[,7:ncol(joined_89)], 1:2, recode)
+```
+
+```{r}
+votes_89_pca <- prcomp(votes_89_num, scale=FALSE)
+```
+
+```{r}
+ggbiplot(votes_89_pca,scale=0, var.axes = FALSE, groups=members_1989$party) + scale_color_manual(values = c("D" = "darkblue", "R" = "firebrick", "I" = "green")) + ggtitle("Fig 2: PCA Biplot for Senators by party, 1989") + theme(text = element_text(size=10), plot.title = element_text(hjust=0.5))
+```
+
+```{r}
+rep_party <- c(mean(votes_89_pca$x[rep,1]),mean(votes_89_pca$x[rep,2]))
+mcconnell <- c(votes_89_pca$x[mc,1], votes_89_pca$x[mc,2])
+
+testmatrix <- matrix(nrow=2, ncol=2)
+
+testmatrix[1,1] <- mcconnell[1]
+testmatrix[1,2] <- mcconnell[2]
+testmatrix[2,1] <- rep_party[1]
+testmatrix[2,2] <- rep_party[2]
+
+dist(testmatrix, method="euclidian")[1]
+        
+```
+
+```{r}
+
+dist_from_reps <- c()
+dist_from_dems <- c()
+
+vote1 <- "votes_"
+members1 <- "members_"
+csv <- ".csv"
+
+counter = 1
+
+for (i in 1989:2014){
+  year <- i
+  
+  votes_string <- paste(vote1,year,csv,sep="")
+  members_string <- paste(members1,year,csv,sep="")
+  
+  votes_i <- read.csv(votes_string)
+  members_i <- read.csv(members_string)
+  
+  joined_i <- join(members_i, votes_i, by="id")
+  
+  mc <- which(joined_i$last_name == "McConnell")
+
+  dem <- which(joined_i$party =="D")
+
+  rep <- which(joined_i$party =="R")
+  
+  votes_i_num = apply(joined_i[7:ncol(joined_i)], 1:2, recode)
+  
+  votes_i_pca <- prcomp(votes_i_num, scale=FALSE)
+  
+  rep_party <- c(mean(votes_i_pca$x[rep,1]),mean(votes_i_pca$x[rep,2]))
+  mcconnell <- c(votes_i_pca$x[mc,1], votes_i_pca$x[mc,2])
+  dem_party <- c(mean(votes_i_pca$x[dem,1]),mean(votes_i_pca$x[dem,2]))
+  
+  repmatrix <- matrix(nrow=2, ncol=2)
+  demmatrix <- matrix(nrow=2, ncol=2)
+
+  repmatrix[1,1] <- mcconnell[1]
+  repmatrix[1,2] <- mcconnell[2]
+  repmatrix[2,1] <- rep_party[1]
+  repmatrix[2,2] <- rep_party[2]
+  
+  demmatrix[1,1] <- mcconnell[1]
+  demmatrix[1,2] <- mcconnell[2]
+  demmatrix[2,1] <- dem_party[1]
+  demmatrix[2,2] <- dem_party[2]
+
+  rep_dist <- dist(repmatrix, method="euclidian")
+  dem_dist <- dist(demmatrix, method="euclidian")
+  
+  dist_from_reps[counter] <- rep_dist
+  dist_from_dems[counter] <- dem_dist
+  
+  counter = counter + 1
+  
+}
+
+
+
+```
+
+```{r}
+plot(voting_years,dist_from_reps,type="b",xlab="Year",ylab="Euclidian Dist Between McConnell and GOP Mean",main="Fig4: McConnell Distance from Average Republican, 1989-2014")
+```
+
+
+```{r}
+plot(voting_years,dist_from_dems,type="b",xlab="Year",ylab="Euclidian Dist Between McConnell and Dem Mean",main="Fig5: McConnell Distance from Average Democrat, 1989-2014")
+```
+
+
+```{r}
+ggplot(data.frame(votes_89_pca$x, members_1989$last_name[mcmem_rep]),aes(x = PC1, y = PC2, label = members_1989.last_name.mcmem_rep.), size  =8) +
+    geom_point() + geom_text_repel(max.overlaps=Inf)
+```
+
+```{r}
+ggplot(data.frame(votes_97_pca$x[reps_97,], members_1997$last_name[reps_97]),aes(x = PC1, y = PC2, label = members_1997.last_name.reps_97.), size  =8) +
+    geom_point() + geom_text_repel(max.overlaps=Inf) + geom_point(aes(x=8.485889,y=-0.3419002),color="blue")
+```
+
+```{r}
+mean(votes_97_pca$x[reps_97,1])
+mean(votes_97_pca$x[reps_97,2])
+```
+
+```{r}
+#votes_89_pca$x[1,1] + votes_89_pca$x[2,1]
+#NROW(votes_89_pca$x[,1])
+
+#View(data.frame(votes_89_pca$x, members_1989$last_name[mcmem_rep]))
+```
+
+```{r}
+(votes_89_pca$x[,1])
+```
+
+
+
+
+
+
+
+
+
+
