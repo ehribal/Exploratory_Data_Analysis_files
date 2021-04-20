@@ -1,0 +1,381 @@
+---
+title: "Mini project"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+install.packages("gapminder")
+```
+
+```{r}
+#library(ggplot2)
+#library(plyr)
+#library(tidyverse)
+library(ggiraph)
+```
+
+```{r}
+library("gapminder")
+```
+
+```{r}
+View(gapminder)
+```
+
+```{r}
+af52 <- which(gapminder$year == 1952 & gapminder$continent == "Africa")
+a <- weighted.mean(gapminder$lifeExp[af52],gapminder$pop[af52])
+af57 <- which(gapminder$year == 1957 & gapminder$continent == "Africa")
+b <- weighted.mean(gapminder$lifeExp[af57],gapminder$pop[af57])
+af62 <- which(gapminder$year == 1962 & gapminder$continent == "Africa")
+c <- weighted.mean(gapminder$lifeExp[af62],gapminder$pop[af62])
+af67 <- which(gapminder$year == 1967 & gapminder$continent == "Africa")
+d <- weighted.mean(gapminder$lifeExp[af67],gapminder$pop[af67])
+af72 <- which(gapminder$year == 1972 & gapminder$continent == "Africa")
+e <- weighted.mean(gapminder$lifeExp[af72],gapminder$pop[af72])
+af77 <- which(gapminder$year == 1977 & gapminder$continent == "Africa")
+f <- weighted.mean(gapminder$lifeExp[af77],gapminder$pop[af77])
+af82 <- which(gapminder$year == 1982 & gapminder$continent == "Africa")
+g <- weighted.mean(gapminder$lifeExp[af82],gapminder$pop[af82])
+af87 <- which(gapminder$year == 1987 & gapminder$continent == "Africa")
+h <- weighted.mean(gapminder$lifeExp[af87],gapminder$pop[af87])
+af92 <- which(gapminder$year == 1992 & gapminder$continent == "Africa")
+i <- weighted.mean(gapminder$lifeExp[af92],gapminder$pop[af92])
+af97 <- which(gapminder$year == 1997 & gapminder$continent == "Africa")
+j <- weighted.mean(gapminder$lifeExp[af97],gapminder$pop[af97])
+af02 <- which(gapminder$year == 2002 & gapminder$continent == "Africa")
+k <- weighted.mean(gapminder$lifeExp[af02],gapminder$pop[af02])
+af07 <- which(gapminder$year == 2007 & gapminder$continent == "Africa")
+l <- weighted.mean(gapminder$lifeExp[af07],gapminder$pop[af07])
+```
+
+```{r}
+am52 <- which(gapminder$year == 1952 & gapminder$continent == "Americas")
+m <- weighted.mean(gapminder$lifeExp[am52],gapminder$pop[am52])
+am57 <- which(gapminder$year == 1957 & gapminder$continent == "Americas")
+n <- weighted.mean(gapminder$lifeExp[am57],gapminder$pop[am57])
+am62 <- which(gapminder$year == 1962 & gapminder$continent == "Americas")
+o <- weighted.mean(gapminder$lifeExp[am62],gapminder$pop[am62])
+am67 <- which(gapminder$year == 1967 & gapminder$continent == "Americas")
+p <- weighted.mean(gapminder$lifeExp[am67],gapminder$pop[am67])
+am72 <- which(gapminder$year == 1972 & gapminder$continent == "Americas")
+q <- weighted.mean(gapminder$lifeExp[am72],gapminder$pop[am72])
+am77 <- which(gapminder$year == 1977 & gapminder$continent == "Americas")
+r <- weighted.mean(gapminder$lifeExp[am77],gapminder$pop[am77])
+am82 <- which(gapminder$year == 1982 & gapminder$continent == "Americas")
+s <- weighted.mean(gapminder$lifeExp[am82],gapminder$pop[am82])
+am87 <- which(gapminder$year == 1987 & gapminder$continent == "Americas")
+t <- weighted.mean(gapminder$lifeExp[am87],gapminder$pop[am87])
+am92 <- which(gapminder$year == 1992 & gapminder$continent == "Americas")
+u <- weighted.mean(gapminder$lifeExp[am92],gapminder$pop[am92])
+am97 <- which(gapminder$year == 1997 & gapminder$continent == "Americas")
+v <- weighted.mean(gapminder$lifeExp[am97],gapminder$pop[am97])
+am02 <- which(gapminder$year == 2002 & gapminder$continent == "Americas")
+w <- weighted.mean(gapminder$lifeExp[am02],gapminder$pop[am02])
+am07 <- which(gapminder$year == 2007 & gapminder$continent == "Americas")
+x <- weighted.mean(gapminder$lifeExp[am07],gapminder$pop[am07])
+```
+
+```{r}
+am52 <- which(gapminder$year == 1952 & gapminder$continent == "Americas")
+m <- weighted.mean(gapminder$lifeExp[am52],gapminder$pop[am52])
+am57 <- which(gapminder$year == 1957 & gapminder$continent == "Americas")
+n <- weighted.mean(gapminder$lifeExp[am57],gapminder$pop[am57])
+am62 <- which(gapminder$year == 1962 & gapminder$continent == "Americas")
+o <- weighted.mean(gapminder$lifeExp[am62],gapminder$pop[am62])
+am67 <- which(gapminder$year == 1967 & gapminder$continent == "Americas")
+p <- weighted.mean(gapminder$lifeExp[am67],gapminder$pop[am67])
+am72 <- which(gapminder$year == 1972 & gapminder$continent == "Americas")
+q <- weighted.mean(gapminder$lifeExp[am72],gapminder$pop[am72])
+am77 <- which(gapminder$year == 1977 & gapminder$continent == "Americas")
+r <- weighted.mean(gapminder$lifeExp[am77],gapminder$pop[am77])
+am82 <- which(gapminder$year == 1982 & gapminder$continent == "Americas")
+s <- weighted.mean(gapminder$lifeExp[am82],gapminder$pop[am82])
+am87 <- which(gapminder$year == 1987 & gapminder$continent == "Americas")
+t <- weighted.mean(gapminder$lifeExp[am87],gapminder$pop[am87])
+am92 <- which(gapminder$year == 1992 & gapminder$continent == "Americas")
+u <- weighted.mean(gapminder$lifeExp[am92],gapminder$pop[am92])
+am97 <- which(gapminder$year == 1997 & gapminder$continent == "Americas")
+v <- weighted.mean(gapminder$lifeExp[am97],gapminder$pop[am97])
+am02 <- which(gapminder$year == 2002 & gapminder$continent == "Americas")
+w <- weighted.mean(gapminder$lifeExp[am02],gapminder$pop[am02])
+am07 <- which(gapminder$year == 2007 & gapminder$continent == "Americas")
+x <- weighted.mean(gapminder$lifeExp[am07],gapminder$pop[am07])
+```
+
+```{r}
+as52 <- which(gapminder$year == 1952 & gapminder$continent == "Asia")
+y <- weighted.mean(gapminder$lifeExp[as52],gapminder$pop[as52])
+as57 <- which(gapminder$year == 1957 & gapminder$continent == "Asia")
+z <- weighted.mean(gapminder$lifeExp[as57],gapminder$pop[as57])
+as62 <- which(gapminder$year == 1962 & gapminder$continent == "Asia")
+aa <- weighted.mean(gapminder$lifeExp[as62],gapminder$pop[as62])
+as67 <- which(gapminder$year == 1967 & gapminder$continent == "Asia")
+bb <- weighted.mean(gapminder$lifeExp[as67],gapminder$pop[as67])
+as72 <- which(gapminder$year == 1972 & gapminder$continent == "Asia")
+cc <- weighted.mean(gapminder$lifeExp[as72],gapminder$pop[as72])
+as77 <- which(gapminder$year == 1977 & gapminder$continent == "Asia")
+dd <- weighted.mean(gapminder$lifeExp[as77],gapminder$pop[as77])
+as82 <- which(gapminder$year == 1982 & gapminder$continent == "Asia")
+ee <- weighted.mean(gapminder$lifeExp[as82],gapminder$pop[as82])
+as87 <- which(gapminder$year == 1987 & gapminder$continent == "Asia")
+ff <- weighted.mean(gapminder$lifeExp[as87],gapminder$pop[as87])
+as92 <- which(gapminder$year == 1992 & gapminder$continent == "Asia")
+gg <- weighted.mean(gapminder$lifeExp[as92],gapminder$pop[as92])
+as97 <- which(gapminder$year == 1997 & gapminder$continent == "Asia")
+hh <- weighted.mean(gapminder$lifeExp[as97],gapminder$pop[as97])
+as02 <- which(gapminder$year == 2002 & gapminder$continent == "Asia")
+ii <- weighted.mean(gapminder$lifeExp[as02],gapminder$pop[as02])
+as07 <- which(gapminder$year == 2007 & gapminder$continent == "Asia")
+jj <- weighted.mean(gapminder$lifeExp[as07],gapminder$pop[as07])
+```
+
+```{r}
+eu52 <- which(gapminder$year == 1952 & gapminder$continent == "Europe")
+kk <- weighted.mean(gapminder$lifeExp[eu52],gapminder$pop[eu52])
+eu57 <- which(gapminder$year == 1957 & gapminder$continent == "Europe")
+ll <- weighted.mean(gapminder$lifeExp[eu57],gapminder$pop[eu57])
+eu62 <- which(gapminder$year == 1962 & gapminder$continent == "Europe")
+mm <- weighted.mean(gapminder$lifeExp[eu62],gapminder$pop[eu62])
+eu67 <- which(gapminder$year == 1967 & gapminder$continent == "Europe")
+nn <- weighted.mean(gapminder$lifeExp[eu67],gapminder$pop[eu67])
+eu72 <- which(gapminder$year == 1972 & gapminder$continent == "Europe")
+oo <- weighted.mean(gapminder$lifeExp[eu72],gapminder$pop[eu72])
+eu77 <- which(gapminder$year == 1977 & gapminder$continent == "Europe")
+pp <- weighted.mean(gapminder$lifeExp[eu77],gapminder$pop[eu77])
+eu82 <- which(gapminder$year == 1982 & gapminder$continent == "Europe")
+qq <- weighted.mean(gapminder$lifeExp[eu82],gapminder$pop[eu82])
+eu87 <- which(gapminder$year == 1987 & gapminder$continent == "Europe")
+rr <- weighted.mean(gapminder$lifeExp[eu87],gapminder$pop[eu87])
+eu92 <- which(gapminder$year == 1992 & gapminder$continent == "Europe")
+ss <- weighted.mean(gapminder$lifeExp[eu92],gapminder$pop[eu92])
+eu97 <- which(gapminder$year == 1997 & gapminder$continent == "Europe")
+tt <- weighted.mean(gapminder$lifeExp[eu97],gapminder$pop[eu97])
+eu02 <- which(gapminder$year == 2002 & gapminder$continent == "Europe")
+uu <- weighted.mean(gapminder$lifeExp[eu02],gapminder$pop[eu02])
+eu07 <- which(gapminder$year == 2007 & gapminder$continent == "Europe")
+vv <- weighted.mean(gapminder$lifeExp[eu07],gapminder$pop[eu07])
+```
+
+```{r}
+oc52 <- which(gapminder$year == 1952 & gapminder$continent == "Oceania")
+ww <- weighted.mean(gapminder$lifeExp[oc52],gapminder$pop[oc52])
+oc57 <- which(gapminder$year == 1957 & gapminder$continent == "Oceania")
+xx <- weighted.mean(gapminder$lifeExp[oc57],gapminder$pop[oc57])
+oc62 <- which(gapminder$year == 1962 & gapminder$continent == "Oceania")
+yy <- weighted.mean(gapminder$lifeExp[oc62],gapminder$pop[oc62])
+oc67 <- which(gapminder$year == 1967 & gapminder$continent == "Oceania")
+zz <- weighted.mean(gapminder$lifeExp[oc67],gapminder$pop[oc67])
+oc72 <- which(gapminder$year == 1972 & gapminder$continent == "Oceania")
+aaa <- weighted.mean(gapminder$lifeExp[oc72],gapminder$pop[oc72])
+oc77 <- which(gapminder$year == 1977 & gapminder$continent == "Oceania")
+bbb <- weighted.mean(gapminder$lifeExp[oc77],gapminder$pop[oc77])
+oc82 <- which(gapminder$year == 1982 & gapminder$continent == "Oceania")
+ccc <- weighted.mean(gapminder$lifeExp[oc82],gapminder$pop[oc82])
+oc87 <- which(gapminder$year == 1987 & gapminder$continent == "Oceania")
+ddd <- weighted.mean(gapminder$lifeExp[oc87],gapminder$pop[oc87])
+oc92 <- which(gapminder$year == 1992 & gapminder$continent == "Oceania")
+eee <- weighted.mean(gapminder$lifeExp[oc92],gapminder$pop[oc92])
+oc97 <- which(gapminder$year == 1997 & gapminder$continent == "Oceania")
+fff <- weighted.mean(gapminder$lifeExp[oc97],gapminder$pop[oc97])
+oc02 <- which(gapminder$year == 2002 & gapminder$continent == "Oceania")
+ggg <- weighted.mean(gapminder$lifeExp[oc02],gapminder$pop[oc02])
+oc07 <- which(gapminder$year == 2007 & gapminder$continent == "Oceania")
+hhh<- weighted.mean(gapminder$lifeExp[oc07],gapminder$pop[oc07])
+```
+
+```{r}
+wavg <- c(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,aa,bb,cc,dd,ee,ff,gg,hh,ii,jj,kk,ll,mm,nn,oo,pp,qq,rr,ss,tt,uu,vv,ww,xx,yy,zz,aaa,bbb,ccc,ddd,eee,fff,ggg,hhh)
+```
+
+```{r}
+wavgs <- data.frame(wavg)
+names(wavgs)[1] <- "weighted_avg"
+View(wavgs)
+```
+
+```{r}
+sum_data <- ddply(gapminder, c("continent","year"),summarize,lifeExp.mean = mean(gapminder$lifeExp))
+sum_data <- cbind(sum_data,wavgs$weighted_avg)
+names(sum_data)[4] <- "weighted_avg"
+```
+
+```{r}
+View(sum_data)
+```
+
+```{r}
+avgs52 <- which(sum_data$year == 1952)
+mean(sum_data$weighted_avg[avgs52])
+avgs07 <- which(sum_data$year == 2007)
+mean(sum_data$weighted_avg[avgs07])
+```
+
+```{r}
+ggplot(sum_data) + aes(x=year, y=weighted_avg, group=continent, color = continent) + geom_line() + ggtitle("Fig3: Change in life expectancy by continent over time") + ylab("Weighted Average Life Expectancy") + xlab("Year") + theme(text = element_text(size=10), plot.title = element_text(hjust=0.5))
+```
+
+```{r}
+ggplot(sum_data) + aes(x=year, y=log(weighted_avg), group=continent, color = continent) + geom_line()
+```
+
+```{r}
+af_data <- subset(gapminder,continent == "Africa")
+sum_af <- ddply(af_data, c("country","year"),summarize,lifeExp.mean = mean(lifeExp,na.rm=TRUE))
+ggplot(sum_af) + aes(x=year, y=log(lifeExp.mean), group=country, color = country) + geom_line()
+```
+
+```{r}
+af_data <- subset(gapminder,continent == "Africa")
+sum_af <- ddply(af_data, c("country","year"),summarize,lifeExp.mean = mean(lifeExp,na.rm=TRUE))
+ggplot(sum_af) + aes(x=year, y=log(lifeExp.mean), group=country, color = country) + geom_line() + stat_smooth(method=loess)
+```
+
+```{r}
+am_data <- subset(gapminder,continent == "Americas")
+sum_am <- ddply(am_data, c("country","year"),summarize,lifeExp.mean = mean(lifeExp,na.rm=TRUE))
+ggplot(sum_am) + aes(x=year, y=log(lifeExp.mean), group=country, color = country) + geom_line() + stat_smooth(method=loess)
+```
+
+```{r}
+sum_am <- sum_am %>% group_by(country) %>% mutate(pct_change = (lifeExp.mean-lag(lifeExp.mean,n=11))/lag(lifeExp.mean,n=11))
+mean(sum_am$pct_change,na.rm=TRUE)
+median(sum_am$pct_change,na.rm=TRUE)
+```
+
+
+```{r}
+as_data <- subset(gapminder,continent == "Asia")
+sum_as <- ddply(as_data, c("country","year","pop"),summarize,lifeExp.mean = mean(lifeExp,na.rm=TRUE))
+#ggplot(sum_as) + aes(x=year, y=(lifeExp.mean), group=country, color = country) + geom_line()
+sum_as <- sum_as %>% group_by(country) %>% mutate(pct_change = (lifeExp.mean-lag(lifeExp.mean,n=11))/lag(lifeExp.mean,n=11))
+View(sum_as)
+```
+
+```{r}
+ggplot(sum_as) + aes(x=year, y=(lifeExp.mean), group=country, color = country) + geom_line() + stat_smooth(method=loess) + ggtitle("Change in life expectancy in Asia, by country")
+```
+
+```{r}
+weighted.mean(sum_as$pct_change,sum_as$pop,na.rm=TRUE)
+median(sum_as$pct_change,na.rm=TRUE)
+```
+
+```{r}
+scat_ind <- which(sum_as$year == 2007)
+data_for_scat <- sum_as[scat_ind,]
+View(data_for_scat)
+```
+
+```{r}
+eu_data <- subset(gapminder,continent == "Europe")
+sum_eu <- ddply(eu_data, c("country","year"),summarize,lifeExp.mean = mean(lifeExp,na.rm=TRUE))
+ggplot(sum_eu) + aes(x=year, y=log(lifeExp.mean), group=country, color = country) + geom_line()
+```
+
+```{r}
+time_vec <- c()
+append(time_vec,counter)
+append(time_vec,counter+1)
+time_vec
+```
+
+```{r}
+counter <- 1
+for (row in 1:1704){
+  if (counter == 12){
+    time_vec <- append(time_vec,counter)
+    counter <- 1
+  } else{
+    time_vec <- append(time_vec,counter)
+    counter <- counter + 1
+  }
+}
+```
+
+
+
+```{r}
+gapminder_time <- cbind(gapminder,time_vec)
+gapminder_time <- gapminder_time[1:1704,]
+View(gapminder_time)
+```
+
+```{r}
+gap_fit <- lm(lifeExp ~ gdpPercap + time_vec, data=gapminder_time)
+summary(gap_fit)
+```
+```{r}
+View(gapminder)
+```
+
+
+```{r}
+ggplot(gapminder_time,aes(x=gdpPercap,y=lifeExp)) + geom_point() + ggtitle("Fig5: Relationship between GDP Per Capita and Life Expectancy, Worldwide") + xlab("GDP Per Capita (USD)") + ylab("Life Expectancy") + theme(text = element_text(size=15), plot.title = element_text(hjust=0.5))
+```
+
+
+```{r}
+ggplot(gapminder_time,aes(x=time_vec,y=lifeExp))
+```
+
+```{r}
+first_half <- which(gapminder$year == 1952 | gapminder$year == 1957 | gapminder$year == 1962 | gapminder$year == 1967 | gapminder$year == 1972 | gapminder$year == 1977)
+first_data <- gapminder[first_half,]
+```
+
+```{r}
+View(first_data)
+```
+
+```{r}
+first_reg <- lm(lifeExp ~ gdpPercap,data=first_data)
+summary(first_reg)
+```
+
+```{r}
+second_half <- which(gapminder$year == 1982 | gapminder$year == 1987 | gapminder$year == 1992 | gapminder$year == 1997 | gapminder$year == 2002 | gapminder$year == 2007)
+second_data <- gapminder[second_half,]
+```
+
+```{r}
+second_reg <- lm(lifeExp ~ gdpPercap,data=second_data)
+summary(second_reg)
+```
+
+```{r}
+ggplot(first_data,aes(x=gdpPercap,y=lifeExp)) + geom_point() + ggtitle("Fig6: Relationship between GDP Per Capita and Life Expectancy by Continent, 1952-1977") + xlab("GDP Per Capita (USD)") + ylab("Life Expectancy") + facet_wrap(~continent) + theme(text = element_text(size=10), plot.title = element_text(hjust=0.5))
+```
+
+```{r}
+png("NAME.png", width = 800, height = 500)
+ggplot(second_data,aes(x=gdpPercap,y=lifeExp)) + geom_point() + ggtitle("Fig7: Relationship between GDP Per Capita and Life Expectancy by Continent, 1982-2007") + xlab("GDP Per Capita (USD)") + ylab("Life Expectancy") + facet_wrap(~continent) + theme(text = element_text(size=10), plot.title = element_text(hjust=0.5))
+dev.off()
+```
+
+
+
